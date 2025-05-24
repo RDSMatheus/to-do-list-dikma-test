@@ -4,6 +4,10 @@ services:
     ports: ["3001:3000"]
     depends_on:
       - backend
+    volumes:
+      - ./to-do-list:/app
+      - /app/node_modules
+    command: npm run dev
 
   backend:
     build: ./to-do-list-api
@@ -12,6 +16,10 @@ services:
       - mongodb
     environment:
       - MONGODB_URL=mongodb://mongodb:27017/todolist
+    volumes:
+      - ./to-do-list-api:/app
+      - /app/node_modules
+    command: npm run start:dev
 
   mongodb:
     image: mongo:7
