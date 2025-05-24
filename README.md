@@ -23,7 +23,8 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) composta por tr
 
 ## Como rodar o projeto
 
-1. **Pré-requisitos:**  
+1. **Pré-requisitos:**
+
    - [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) instalados.
 
 2. **Suba todos os serviços:**
@@ -42,7 +43,7 @@ Este projeto é uma aplicação de lista de tarefas (To-Do List) composta por tr
 ## Variáveis de ambiente
 
 - O backend utiliza a variável `MONGODB_URL` para se conectar ao banco de dados MongoDB.  
-  Exemplo:  
+  Exemplo:
   ```
   MONGODB_URL=mongodb://mongodb:27017/todolist
   ```
