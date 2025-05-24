@@ -6,12 +6,13 @@ COPY ./package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 
-RUN npm run build
+RUN mkdir -p /app && chown node:node /app
 
 EXPOSE 3000
 
 USER node
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start:dev"]
+
