@@ -1,4 +1,13 @@
 import { z } from 'zod';
+import { ApiProperty } from '@nestjs/swagger';
+
+export class CreateTarefaDto {
+  @ApiProperty()
+  titulo: string;
+
+  @ApiProperty()
+  descricao?: string;
+}
 
 export const TarefaDto = z.object({
   titulo: z
