@@ -36,6 +36,7 @@ export class TarefaRepository {
 
   async getTaskById(id: string): Promise<Tarefa | null> {
     const task = await this.tarefaModel.findById(id);
+    console.log(task);
     return task;
   }
 }

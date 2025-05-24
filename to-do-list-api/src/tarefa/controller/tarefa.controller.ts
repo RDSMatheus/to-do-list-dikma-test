@@ -4,6 +4,7 @@ import {
   DefaultValuePipe,
   Get,
   HttpStatus,
+  Param,
   ParseIntPipe,
   Post,
   Query,
@@ -38,5 +39,11 @@ export class TarefaController {
   ) {
     const tasks = await this.tarefaService.getTasks({ status, limit, page });
     res.status(HttpStatus.OK).json({ message: 'Tarefas retornadas.', tasks });
+  }
+
+  @Get(':id')
+  async getTaskById(@Param('id') id: string, @Res() res: Response) {
+    const task = await this.tarefaService.getTaskById(id);
+    res.status(HttpStatus.OK).json({ message: 'Tarefa encontrada.', task });
   }
 }
