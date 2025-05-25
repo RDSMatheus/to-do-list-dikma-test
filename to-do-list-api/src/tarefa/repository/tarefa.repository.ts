@@ -55,4 +55,9 @@ export class TarefaRepository {
 
     return task;
   }
+
+  async deleteTask(id: string): Promise<Tarefa | null> {
+    const task = await this.tarefaModel.findByIdAndDelete(id);
+    return task;
+  }
 }

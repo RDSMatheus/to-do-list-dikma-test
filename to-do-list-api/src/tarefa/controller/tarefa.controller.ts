@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   DefaultValuePipe,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -18,6 +19,7 @@ import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
 import { Response } from 'express';
 import { TarefaStatus } from '../schema/tarefa.schema';
 import { UpdateBody, UpdateTarefa } from '../dto/update-dto';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('tarefa')
 export class TarefaController {
@@ -57,5 +59,10 @@ export class TarefaController {
   ) {
     const task = await this.tarefaService.updateTask({ id, body });
     res.status(HttpStatus.OK).json({ message: 'Tarefa atualizada.', task });
+  }
+
+  @Delete(':id')
+  async deleteTask(@Param('id') id: string, @Res() res: Response) {
+    res.status(HttpStatus.NO_CONTENT).send();
   }
 }
