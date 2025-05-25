@@ -5,8 +5,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Tarefa, TarefaSchema } from './schema/tarefa.schema';
 import { TarefaRepository } from './repository/tarefa.repository';
 
-export const ITAREFA_REPOSITORY = 'ITarefaRepository';
-
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Tarefa.name, schema: TarefaSchema }]),

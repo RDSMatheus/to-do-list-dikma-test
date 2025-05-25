@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { TarefaDto } from '../dto/create-tarefa.tdo';
+import { TarefaDto } from '../dto/create-tarefa.dto';
 import { TarefaRepository } from '../repository/tarefa.repository';
 import { Tarefa, TarefaStatus } from '../schema/tarefa.schema';
+import { UpdateTarefa } from '../dto/update-dto';
 
 @Injectable()
 export class TarefaService {
@@ -35,6 +36,21 @@ export class TarefaService {
       throw new NotFoundException({
         message: 'Tarefa não encontrada ou inexistente',
       });
+
+    return task;
+  }
+
+  async updateTask({ id, body }: UpdateTarefa): Promise<Tarefa | null> {
+    if (body.status === TarefaStatus.done) {
+      body.dataConclusao = new Date();
+    }
+
+    console.log('body:', body);
+
+    const task = await this.tarefaRepository.updateTask({ id, body: body });
+
+    if (!task)
+      throw new NotFoundException({ message: 'Tarefa não encontrada.' });
 
     return task;
   }

@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Tarefa, TarefaStatus } from '../schema/tarefa.schema';
 import { Model } from 'mongoose';
-import { TarefaDto } from '../dto/create-tarefa.tdo';
+import { TarefaDto } from '../dto/create-tarefa.dto';
+import { UpdateTarefa } from '../dto/update-dto';
 
 @Injectable()
 export class TarefaRepository {
@@ -37,6 +38,21 @@ export class TarefaRepository {
   async getTaskById(id: string): Promise<Tarefa | null> {
     const task = await this.tarefaModel.findById(id);
     console.log(task);
+    return task;
+  }
+
+  async updateTask({ id, body }: UpdateTarefa): Promise<Tarefa | null> {
+    const task = await this.tarefaModel.findByIdAndUpdate(
+      id,
+      {
+        descricao: body.descricao,
+        titulo: body.titulo,
+        status: body.status,
+        dataConclusao: body.dataConclusao,
+      },
+      { new: true },
+    );
+
     return task;
   }
 }
