@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   DefaultValuePipe,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -14,10 +15,11 @@ import {
 } from '@nestjs/common';
 import { TarefaService } from '../service/tarefa.service';
 import { CreateTarefaDto, TarefaDto } from '../dto/create-tarefa.dto';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
 import { Response } from 'express';
 import { TarefaStatus } from '../schema/tarefa.schema';
 import { UpdateBody, UpdateTarefa } from '../dto/update-dto';
+import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('tarefa')
 export class TarefaController {
@@ -57,5 +59,11 @@ export class TarefaController {
   ) {
     const task = await this.tarefaService.updateTask({ id, body });
     res.status(HttpStatus.OK).json({ message: 'Tarefa atualizada.', task });
+  }
+
+  @Delete(':id')
+  async deleteTask(@Param('id') id: string, @Res() res: Response) {
+    await this.tarefaService.deleteTask(id);
+    res.status(HttpStatus.NO_CONTENT).send();
   }
 }

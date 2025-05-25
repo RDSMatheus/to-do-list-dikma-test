@@ -54,4 +54,13 @@ export class TarefaService {
 
     return task;
   }
+
+  async deleteTask(id: string): Promise<void> {
+    const task = await this.tarefaRepository.deleteTask(id);
+
+    if (!task)
+      throw new NotFoundException({ message: 'Tarefa não encontrada.' });
+
+    return;
+  }
 }
