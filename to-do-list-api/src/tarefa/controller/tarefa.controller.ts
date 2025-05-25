@@ -15,7 +15,7 @@ import {
 } from '@nestjs/common';
 import { TarefaService } from '../service/tarefa.service';
 import { CreateTarefaDto, TarefaDto } from '../dto/create-tarefa.dto';
-import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
 import { Response } from 'express';
 import { TarefaStatus } from '../schema/tarefa.schema';
 import { UpdateBody, UpdateTarefa } from '../dto/update-dto';
@@ -63,6 +63,7 @@ export class TarefaController {
 
   @Delete(':id')
   async deleteTask(@Param('id') id: string, @Res() res: Response) {
+    await this.tarefaService.deleteTask(id);
     res.status(HttpStatus.NO_CONTENT).send();
   }
 }
