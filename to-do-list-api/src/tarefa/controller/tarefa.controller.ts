@@ -7,15 +7,17 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
   Query,
   Res,
   UsePipes,
 } from '@nestjs/common';
 import { TarefaService } from '../service/tarefa.service';
-import { CreateTarefaDto, TarefaDto } from '../dto/create-tarefa.tdo';
+import { CreateTarefaDto, TarefaDto } from '../dto/create-tarefa.dto';
 import { ZodValidationPipe } from 'src/common/pipes/zod-validation.pipe';
 import { Response } from 'express';
 import { TarefaStatus } from '../schema/tarefa.schema';
+import { UpdateBody, UpdateTarefa } from '../dto/update-dto';
 
 @Controller('tarefa')
 export class TarefaController {
@@ -45,5 +47,15 @@ export class TarefaController {
   async getTaskById(@Param('id') id: string, @Res() res: Response) {
     const task = await this.tarefaService.getTaskById(id);
     res.status(HttpStatus.OK).json({ message: 'Tarefa encontrada.', task });
+  }
+
+  @Put(':id')
+  async updateTask(
+    @Param('id') id: string,
+    @Body() body: UpdateBody,
+    @Res() res: Response,
+  ) {
+    const task = await this.tarefaService.updateTask({ id, body });
+    res.status(HttpStatus.OK).json({ message: 'Tarefa atualizada.', task });
   }
 }

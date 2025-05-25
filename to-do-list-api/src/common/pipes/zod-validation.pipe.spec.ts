@@ -1,4 +1,4 @@
-import { TarefaDto } from 'src/tarefa/dto/create-tarefa.tdo';
+import { TarefaDto } from 'src/tarefa/dto/create-tarefa.dto';
 import { ZodValidationPipe } from './zod-validation.pipe';
 
 describe('ZodValidationPipe', () => {
