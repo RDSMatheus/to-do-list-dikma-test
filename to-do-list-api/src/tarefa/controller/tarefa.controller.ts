@@ -19,7 +19,6 @@ import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
 import { Response } from 'express';
 import { TarefaStatus } from '../schema/tarefa.schema';
 import { UpdateBody, UpdateTarefa } from '../dto/update-dto';
-import { ApiQuery } from '@nestjs/swagger';
 
 @Controller('tarefa')
 export class TarefaController {

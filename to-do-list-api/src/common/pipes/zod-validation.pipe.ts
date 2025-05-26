@@ -17,7 +17,7 @@ export class ZodValidationPipe implements PipeTransform {
     } catch (error) {
       if (error instanceof ZodError) {
         const flattenErrors = error.flatten().fieldErrors;
-        throw new BadRequestException({ message: error.flatten().fieldErrors });
+        throw new BadRequestException({ message: flattenErrors });
       } else throw new InternalServerErrorException();
     }
   }
