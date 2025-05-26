@@ -21,7 +21,7 @@ export class TarefaService {
     page?: string;
   }): Promise<Tarefa[]> {
     const parsedLimit = limit ? Number(limit) : 10;
-    const parsedPage = page ? Number(page) : 1;
+    const parsedPage = page ? Number(page) : 0;
     return await this.tarefaRepository.getTasks({
       limit: parsedLimit,
       skip: parsedPage,
