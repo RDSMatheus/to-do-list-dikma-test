@@ -22,7 +22,7 @@ export class TarefaService {
   }): Promise<Tarefa[]> {
     const parsedLimit = limit ? Number(limit) : 10;
     const parsedPage = page ? Number(page) : 1;
-    return this.tarefaRepository.getTasks({
+    return await this.tarefaRepository.getTasks({
       limit: parsedLimit,
       skip: parsedPage,
       status: status,
@@ -44,8 +44,6 @@ export class TarefaService {
     if (body.status === TarefaStatus.done) {
       body.dataConclusao = new Date();
     }
-
-    console.log('body:', body);
 
     const task = await this.tarefaRepository.updateTask({ id, body: body });
 
